@@ -393,7 +393,7 @@ class _HomePageState extends State<HomePage> {
     else{
       total = double.parse(_nota1.text)*0.6 + double.parse(_nota2.text)*0.1
           + double.parse(_nota3.text)*0.1 + double.parse(_nota4.text)*0.2;
-      total = double.parse(total.toStringAsFixed(3));
+      total = double.parse(total.toStringAsFixed(1));
     }
 
 
