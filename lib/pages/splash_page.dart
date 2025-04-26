@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:practica1_grade_calculator/pages/home_page.dart';
 
@@ -21,10 +22,16 @@ class _SplashPageState extends State<SplashPage> {
     return Scaffold(
       backgroundColor: Colors.grey[600],
       body: Center(
-          child: Image(
-            image: AssetImage("assets/images/logo.png"),
-            width: 150,
-            height: 150,
+          child: Hero(
+            tag: 'logo',
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image(
+                image: AssetImage("assets/images/logo.png"),
+                width: 150,
+                height: 150,
+              ),
+            ),
           )
       ),
 
@@ -32,8 +39,93 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future<void> _closeSplash() async {
-    Future.delayed(const Duration(seconds: 2),() async {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+    Future.delayed(const Duration(milliseconds: 2000),() async {
+      Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            transitionDuration: Duration(milliseconds: 1500),
+              pageBuilder: (context,animation,secondaryAnimation) => PostSplash()));
     });
   }
 }
+
+class PostSplash extends StatefulWidget {
+
+  @override
+  State<PostSplash> createState() => _PostSplashState();
+}
+
+class _PostSplashState extends State<PostSplash> {
+  @override
+  void initState(){
+    super.initState();
+    _closeSplash();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Hero(
+          tag: 'logo',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset('assets/images/logo.png', width: 34,height: 34),
+          ),
+        ),
+        backgroundColor: null,
+        toolbarHeight: 70,
+      ),
+      //backgroundColor: Colors.lightBlue[50],
+    );
+  }
+
+  Future<void> _closeSplash() async {
+    Future.delayed(const Duration(milliseconds: 1300),() async {
+      Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+              transitionDuration: Duration(milliseconds: 600),
+              pageBuilder: (context,animation,secondaryAnimation) => HomePage(),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                return FadeThroughTransition(
+                  animation: animation,
+                  secondaryAnimation: secondaryAnimation,
+                  child: child,
+                );
+              }
+          )
+      );
+    });
+  }
+}
+
+/*class PostSplash extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        title: Row(
+          children: [
+            Hero(
+              tag: 'logo',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Image.asset('assets/images/logo.png', width: 34,height: 34),
+              ),
+            ),
+            const SizedBox(width: 16,),
+            const Text("Calculadora de nota"),
+          ],
+        ),
+        backgroundColor: Color(0xFF7d98a1),
+        toolbarHeight: 70,
+      ),
+      backgroundColor: Colors.lightBlue[50],
+    );
+  }
+
+}*/
