@@ -1,3 +1,5 @@
+
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -5,6 +7,7 @@ class HomePage extends StatefulWidget {
 
   @override
   State<HomePage> createState() => _HomePageState();
+
 }
 
 class _HomePageState extends State<HomePage> {
@@ -24,12 +27,21 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: FocusScope.of(context).unfocus,
+
       child: Scaffold(
         appBar: AppBar(
-          //shape: ,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
           title: Row(
             children: [
-              Image.asset('assets/images/logo.png',scale: 15,),
+              Hero(
+                tag: 'logo',
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                    child: Image.asset('assets/images/logo.png', width: 34,height: 34),
+                ),
+              ),
               const SizedBox(width: 16,),
               const Text("Calculadora de nota"),
             ],
@@ -404,6 +416,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+
 
   void _validateNotes(){
     if(_nota1.text == '' || _nota2.text == '' || _nota3.text == ''|| _nota4.text == ''){
