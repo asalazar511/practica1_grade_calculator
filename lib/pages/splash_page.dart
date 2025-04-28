@@ -100,32 +100,3 @@ class _PostSplashState extends State<PostSplash> {
   }
 }
 
-/*class PostSplash extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        title: Row(
-          children: [
-            Hero(
-              tag: 'logo',
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset('assets/images/logo.png', width: 34,height: 34),
-              ),
-            ),
-            const SizedBox(width: 16,),
-            const Text("Calculadora de nota"),
-          ],
-        ),
-        backgroundColor: Color(0xFF7d98a1),
-        toolbarHeight: 70,
-      ),
-      backgroundColor: Colors.lightBlue[50],
-    );
-  }
-
-}*/
